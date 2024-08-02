@@ -28,8 +28,17 @@ void miscDeclAnalyzedButNotTested() {
 
   {
     // #docregion function-type
-    int add(int a, int b) => a + b;
-    // int function(int, int) = add;
+    void printElement(int element) => print(element);
+
+    void doPrint(void Function(int) printFunction, {required List<int> list}) {
+      list.forEach(printFunction);
+    }
+
+    var list = [1, 2, 3];
+
+    // Store `doPrint` in a variable and call it.
+    void Function(void Function(int), {required List<int> list}) g = doPrint;
+    g(printElement, list: list);
     // #enddocregion function-type
   }
 
